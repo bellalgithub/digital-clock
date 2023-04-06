@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+<div class="container">
+    <div class="digitalClock">
+        <div id="digitalClock">
+            <h1></h1>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    // Digital clock function
+    const time = () => {
+        let date = new Date();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+
+        //Conditional statement to set 1 to 24 hours in 12 hours format
+        let hr = 0;
+        if (hours == 12) {
+            hr = 12;
+        } else if (hours == 24) {
+            hr = 24;
+        } else {
+            hr = hours % 12;
+        }
+
+        //Conditional statement to set time format
+        if (hr < 10) {
+            hr = '0' + hr;
+        }
+        if (minutes < 10) {
+            minutes = '0' + minutes;
+        }
+        if (seconds < 10) {
+            seconds = '0' + seconds;
+        }
+
+        //Ternary statement to set AM / PM
+        let ampm = hours < 12 ? "AM" : "PM";
+
+        //Current time
+        let currentTime = hr + ':' + minutes + ':' + seconds + ' ' + ampm;
+
+        //Change innerHTML to set time
+        document.querySelector('#digitalClock').innerHTML = currentTime;
+    }
+
+    //Set interval method to call the 'time' function at specified intervals (in milliseconds).
+    setInterval(() => {
+        time();
+    }, 1000)
+
+
+    /*   >>>>> Brief description of Java Script functionality :
+
+             1. First I have declared an arrow function called 'time'. After then, assigned the built in Date()
+               object to the variable named 'date' for getting current time.
+       .
+             2. After then, A conditional statement(if ...else if...else) has declared to set Time 1 to 24 hours in 12 hours format.
+             3. After then, A conditional  statement(if) has declared to set Time format  hr, minutes and seconds
+               respectively '0' + hr , '0' + minutes and '0' + seconds
+
+             4. After that,  Ternary statement has declared to set AM / PM  if the hours(hr) is less than 12, it is AM .Otherwise,
+               it is PM.
+             5. After that, querySelector('#digitalClock') has been used to change their innerHTML to the value of 'currentTime'
+
+             6. After then, Set interval method has been used to call the 'time' function at specified intervals (in milliseconds).
+             7. Thats all ...
+       */
+
+</script>
+
+
+</body>
+</html>
